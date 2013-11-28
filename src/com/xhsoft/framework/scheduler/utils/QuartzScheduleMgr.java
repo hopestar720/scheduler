@@ -1,45 +1,43 @@
 package com.xhsoft.framework.scheduler.utils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import org.quartz.JobDetail;
-import org.quartz.JobKey;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.TriggerKey;
-import org.quartz.impl.matchers.GroupMatcher;
+
+import com.xhsoft.framework.scheduler.entity.JobInfo;
 
 public interface QuartzScheduleMgr {
 	
 	static final String DEFAULT_JOB_GROUP = "job_group_1";
     static final String DEFAULT_TRIGGER_GROUP = "trigger_group_1";
     
+    public static final String SUCCESS = "success";
+    public static final String FAILURE = "failure";
+    public static final String EXIST = "exist";
+    public static final String NO_EXIST = "no_exist";
+    
 
     
-	public void addJob();
-	public void addJobs();
+	public String addJob(JobInfo job);
+	public Map<String,String> addJobs(List<JobInfo> jobs);
 	
-	public void removeJob();
-	public void removeJobs();
+	public String removeJob(JobInfo job);
+	public Map<String,String> removeJobs(List<JobInfo> jobs);
 	
-	public void pauseJob();
-	public void pauseJobs();
+	public String pauseJob(JobInfo job);
+	public Map<String,String> pauseJobs(List<JobInfo> jobs);
 	
-	public void resumeJob();
-	public void resumeJobs();
+	public String resumeJob(JobInfo job);
+	public Map<String,String> resumeJobs();
 	
 	public void triggerJob();
 	
-	public void pauseTrigger();
-	public void pauseTriggers();
+	public String pauseTrigger();
+	public Map<String,String> pauseTriggers();
 	
-	public void resumeTrigger();
-	public void resumeTriggers();
+	public String resumeTrigger();
+	public Map<String,String> resumeTriggers();
 	
 	public void pauseAll();
 	public void resumeAll();

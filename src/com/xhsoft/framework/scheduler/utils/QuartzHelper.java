@@ -190,23 +190,52 @@ public class QuartzHelper {
 	}
 	
 	public void pauseAll(){
-		scheduler.pauseAll();
+		try {
+			scheduler.pauseAll();
+		} catch (SchedulerException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
-	public void resumeJob(){
-		scheduler.resumeJob(arg0);
+	public String resumeJob(JobInfo job){
+		JobKey key = new JobKey(Long.toString(job.getId()));
+		try {
+			if(!scheduler.checkExists(key))
+				return NO_EXIST;
+			scheduler.resumeJob(key);
+			return SUCCESS;
+		} catch (SchedulerException e) {
+			
+			e.printStackTrace();
+		}
+		return FAILURE;
 	}
 	public void resumeJobs(){
-		scheduler.resumeJobs(arg0);
+		//scheduler.resumeJobs(arg0);
 	}
-	public void resumeTrigger(){
-		scheduler.resumeJob(arg0);
+	public String resumeTrigger(TriggerInfo trigger){
+		TriggerKey key = new TriggerKey(Long.toString(trigger.getId()));
+		try {
+			if(!scheduler.checkExists(key))
+				return NO_EXIST;
+			scheduler.resumeTrigger(key);
+			return SUCCESS;
+		} catch (SchedulerException e) {
+			e.printStackTrace();
+		}
+		return FAILURE;
 	}
 	public void resumeTriggers(){
-		scheduler.resumeJob(arg0);
+		
 	}
 	public void resumeAll(){
-		scheduler.resumeAll();
+		try {
+			scheduler.resumeAll();
+		} catch (SchedulerException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
 	public void secheduleJob(JobDetail jobDetail){
